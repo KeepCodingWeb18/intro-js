@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>cart example</title>
+  <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+  <h1>Cart Example</h1>
+  <section>
+    <form id="cart" autocomplete="off">
+      <div class="form-control">
+        <label for="name">Product</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div class="form-control">
+        <label for="price">Price</label>
+        <input type="number" id="price" name="price" required>
+      </div>
+      <div class="form-control">
+        <label for="quantity">Quantity</label>
+        <input type="number" id="quantity" name="quantity" required>
+      </div>
+      <button>Add Product</button>
+    </form>
+    <h1>List of products added to the cart</h1>
+    <div id="products">
+    </div>
+    <div id="total">
+    </div>
+  </section>
+  <hr>
+  <section>
+    <h2>Products with discount</h2>
+    <form id="discount">
+      <div class="form-control">
+        <label for="product">Product</label>
+        <input type="text" id="product" name="product" required>
+      </div>
+      <div class="form-control">
+        <label for="discount">Discount</label>
+        <input type="number" id="discount" name="discount" required min="1" max="100">
+      </div>
+      <button type="submit">Add to products with discount</button>
+    </form>
+    <div id="discounts">
+    </div>
+  </section>
+  <script src="./js/dom/cart.js" type="module"></script>
+</body>
+</html>
