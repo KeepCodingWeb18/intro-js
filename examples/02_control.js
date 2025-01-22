@@ -26,3 +26,20 @@ if (firstProductPrice < capProductPrice && sameQuantity && !sameName) {
 message = firstProductPrice < capProductPrice ? `producto ${firstProductName} tiene mejor precio` : `producto ${firstProductName} es mas caro`;
 
 console.log(message);
+
+let day = 'Tuesday';
+
+switch (day) {
+  case 'Tuesday':
+  case 'Monday':
+    console.log('Hay clase de JS');
+    break;
+  default:
+    console.log('No hay clase');
+}
+
+if (day === 'Monday' || day === 'Tuesday') {
+  console.log('Hay clase de JS');
+} else {
+  console.log('No hay clase');
+}
