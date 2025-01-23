@@ -34,6 +34,43 @@ csvProducts.pop();
 csvProducts.shift();
 
 const newCsvItem = csvProducts.join(',');
-console.log(newCsvItem);
+console.log(newCsvItem); // 'Switch,Xbox,PC'
 
+/*
+!IMPORTANTE
+*/
+console.clear();
+const productsUser1 = ['Tv', 'PC', 'PS5'];
+/// ...
+let productsUser2 = [...productsUser1];
+
+const addProduct = (newProduct, productList) => {
+  const newProductList = [...productList];
+  newProductList.push(newProduct);
+  return newProductList;
+};
+
+productsUser2 = addProduct('Cap', productsUser2);
+
+console.log('2', productsUser2);
+console.log('1', productsUser1);
+
+const input = [
+  'Downloads',
+  'videos',
+  'capture',
+  'mp4',
+];
+
+const input2 = [
+  'CodingGame',
+  'python',
+  'py',
+];
+
+const transform = (list) => {
+  return list.join('/');
+};
+
+console.log(transform(input2));
 
