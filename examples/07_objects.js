@@ -121,4 +121,9 @@ admin.email = 'admin@test.com';
 admin.role = 'ADMIN';
 admin.info.name = 'admin';
 
+delete admin.modules;
+
 console.log(admin, user);
+// console.log(JSON.stringify(user, null, 2));
+
+
