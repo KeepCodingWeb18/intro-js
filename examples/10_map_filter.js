@@ -24,9 +24,69 @@ const double = numbers.map(number => (
 
 const lowerThan5 = numbers.filter(number => {
   return number < 5;
+}).map(number => number * 2);
+
+let books = [
+  { title: '1984', author: 'George Orwell', year: 1949 },
+  {
+    title: 'One Hundred Years of Solitude',
+    author: 'Gabriel García Márquez',
+    year: 1967,
+  },
+  {
+    title: "Harry Potter and the Philosopher's Stone",
+    author: 'J.K. Rowling',
+    year: 1997,
+  },
+  { title: 'The Da Vinci Code', author: 'Dan Brown', year: 2003 },
+  { title: 'Twilight', author: 'Stephenie Meyer', year: 2005 },
+  { title: 'The Hunger Games', author: 'Suzanne Collins', year: 2008 },
+];
+
+const titles2000 = books.filter(({ year }) => year > 2000)
+  .map(({ title }) => title)
+  .join(', ');
+
+books = books.map(book => {
+  if (book.title === 'Twilight') {
+    return { ...book, stock: 0 };
+  }
+  return { ...book, stock: 10 };
 });
 
-console.log(lowerThan5, numbers);
+
+const setStock = (title, quantity) => {
+  const book = books.find(book => book.title === title);
+  if (!book) {
+    throw new Error('Book not found');
+  }
+  books = books.map(book => {
+    if (book.title === title) {
+      return { ...book, stock: quantity };
+    }
+    return { ...book };
+  });
+};
+
+try {
+  setStock('JS', 100);
+} catch (error) {
+  console.error(error);
+}
+
+const hasStock = books.some((book) => {
+  return book.stock === 10;
+});
+
+const allStock = books.every((book) => {
+  return book.stock === 0;
+});
+
+console.log(books);
+//  [1, 2, 3, 4, 5];
+
+const total = numbers.reduce((acc, number) => acc + number, 0);
+console.log(total);
 
 /*
 for (let index = 0; index < numbers.length; index++) {
@@ -38,5 +98,5 @@ const doubleForOf = [];
 const lowerThan5ForOf = [];
 for (const number of numbers) {
   doubleForOf.push(number * 2);
-  if (number < 5) lowerThan5ForOf.push(number);
+  if (number < 5) lowerThan5ForOf.push(number * 2);
 }
