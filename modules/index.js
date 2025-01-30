@@ -1,8 +1,15 @@
+// ESModules
 import
-  utilFile, { calculadora, variable }
+  utilFile, { calculadora, variable as variableAlias }
 from './utils.js';
+import * as utils from './utils.js';
 
-console.log(utilFile, variable);
+console.log(utils.variable);
+
+// commonJS -> nodejs
+// const utilFile = require('./utils.js');
+
+console.log(utilFile, variableAlias);
 
 const miCalculadora = calculadora();
 

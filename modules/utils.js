@@ -30,3 +30,5 @@ export const variable = 'hola';
 const utilFile = 'name';
 
 export default utilFile;
+
+// module.exports = utilFile;
