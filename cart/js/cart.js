@@ -118,6 +118,11 @@ const cart = () => {
    * @param {string} productName - The name of the product to remove.
    */
   const removeProduct = (productName) => {
+    // borrar el producto
+    products = products.filter(product => product.name !== productName);
+    // borrar el disscount
+    // discounts = [{ product: { name: 'T-shirt', price: 20, quantity: 2 }, discount: 10 }];
+    discounts = discounts.filter(discount => discount.product.name !== productName);
   };
 
   /**
@@ -125,6 +130,20 @@ const cart = () => {
    * @param {string} productName - The name of the product to remove the discount from.
    */
   const removeDiscount = (productName) => {
+    const disscount = discounts.find(discount => discount.product.name === productName);
+    // remove discount
+    discounts = discounts.filter(discount => discount.product.name !== productName);
+    // update product
+    products = products.map(product => {
+      if (product.name === productName) {
+        return {
+          ...product,
+          price: disscount.product.price,
+        };
+      } else {
+        return product;
+      }
+    });
   };
 
   return { addToCart, getCart, applyDiscount, getDiscounts, removeDiscount, removeProduct, getTotal };
@@ -148,6 +167,8 @@ try {
 }
 micart.applyDiscount('cap', 10);
 console.log(micart.getDiscounts());
+console.log(micart.getTotal());
+micart.removeProduct('cap');
 console.log(micart.getTotal());
 
 export default cart;
