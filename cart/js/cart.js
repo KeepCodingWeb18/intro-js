@@ -67,6 +67,14 @@ const cart = () => {
    * @returns {number} The total price of the products in the cart.
    */
   const getTotal = () => {
+    // let total = 0;
+    // for (const product of products) {
+    //  total = total + (product.price * product.quantity);
+    // }
+    return products.reduce((acum, product) => (
+      acum + product.price * product.quantity
+    ), 0);
+    // return total;
   };
 
   /**
@@ -76,6 +84,33 @@ const cart = () => {
    * @throws {Error} If the product is not found in the product list.
    */
   const applyDiscount = (productName, discount) => {
+    const product = products.find(({ name }) => name === productName);
+    if (!product) {
+      throw new Error('Product not found');
+    }
+    // añadir descuento
+    discounts = [
+      ...discounts,
+      {
+        discount: parseInt(discount),
+        product: { ...product },
+      }
+    ];
+    // actualizar el precio
+    products = products.map((productElement) => {
+      if (productElement.name === productName) {
+        // aplico descuento
+        const discountNumber = parseInt(discount);
+        const priceDiscount = productElement.price * (discountNumber / 100);
+        const price = productElement.price - priceDiscount;
+        return {
+          ...productElement,
+          price,
+        };
+      } else {
+        return productElement;
+      }
+    });
   };
 
   /**
@@ -105,5 +140,14 @@ micart.addToCart({
 
 console.log(micart.getCart());
 console.log(micart.getDiscounts());
+console.log(micart.getTotal());
+try {
+  micart.applyDiscount('No existe', 12);
+} catch (error) {
+  console.log(error);
+}
+micart.applyDiscount('cap', 10);
+console.log(micart.getDiscounts());
+console.log(micart.getTotal());
 
 export default cart;
