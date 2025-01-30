@@ -50,32 +50,28 @@ const cart = () => {
    * Gets the list of products in the cart.
    * @returns {Product[]} The list of products in the cart.
    */
-  const getCart = () => {
-    return products;
-  };
+  const getCart = () => products;
 
   /**
    * Gets the list of discounts applied to the cart.
    * @returns {Discount[]} The list of discounts applied to the cart.
    */
-  const getDiscounts = () => {
-    return discounts;
-  };
+  const getDiscounts = () => discounts;
 
   /**
    * Get the total price of the products in the cart.
    * @returns {number} The total price of the products in the cart.
    */
-  const getTotal = () => {
+  const getTotal = () => (
     // let total = 0;
     // for (const product of products) {
     //  total = total + (product.price * product.quantity);
     // }
-    return products.reduce((acum, product) => (
+    products.reduce((acum, product) => (
       acum + product.price * product.quantity
-    ), 0);
+    ), 0)
     // return total;
-  };
+  );
 
   /**
    * Applies a discount to a product in the cart.
@@ -88,11 +84,12 @@ const cart = () => {
     if (!product) {
       throw new Error('Product not found');
     }
+    const discountNumber = parseInt(discount);
     // añadir descuento
     discounts = [
       ...discounts,
       {
-        discount: parseInt(discount),
+        discount: discountNumber,
         product: { ...product },
       }
     ];
@@ -100,17 +97,19 @@ const cart = () => {
     products = products.map((productElement) => {
       if (productElement.name === productName) {
         // aplico descuento
-        const discountNumber = parseInt(discount);
         const priceDiscount = productElement.price * (discountNumber / 100);
         const price = productElement.price - priceDiscount;
         return {
           ...productElement,
           price,
         };
-      } else {
-        return productElement;
       }
+      return productElement;
     });
+  };
+
+  const removeDiscountElement = (productName) => {
+    discounts = discounts.filter(discount => discount.product.name !== productName);
   };
 
   /**
@@ -122,7 +121,7 @@ const cart = () => {
     products = products.filter(product => product.name !== productName);
     // borrar el disscount
     // discounts = [{ product: { name: 'T-shirt', price: 20, quantity: 2 }, discount: 10 }];
-    discounts = discounts.filter(discount => discount.product.name !== productName);
+    removeDiscountElement(productName);
   };
 
   /**
@@ -132,7 +131,7 @@ const cart = () => {
   const removeDiscount = (productName) => {
     const disscount = discounts.find(discount => discount.product.name === productName);
     // remove discount
-    discounts = discounts.filter(discount => discount.product.name !== productName);
+    removeDiscountElement(productName);
     // update product
     products = products.map(product => {
       if (product.name === productName) {
@@ -140,9 +139,8 @@ const cart = () => {
           ...product,
           price: disscount.product.price,
         };
-      } else {
-        return product;
       }
+      return product;
     });
   };
 
