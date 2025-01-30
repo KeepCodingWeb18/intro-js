@@ -8,6 +8,16 @@
 <body>
   <h2>¡Recuerda abrir la consola del navegador para ver los resultados!</h2>
   <p>Ejecuta Ctrl + Shift + I en Windows/Linux o Command + Option + I en Mac para abrir la consola.</p>
-  <script src="./examples/10_map_filter.js"></script>
+  <script src="./examples/11_async.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+  <script>
+    const getShows = async () => {
+      const response = await axios.get('https://api.tvmaze.com/shows');
+      const str = response.data.map(show => show.name).join(', ');
+      document.body.innerHTML = str;
+    };
+
+    getShows();
+  </script> -->
 </body>
 </html>
